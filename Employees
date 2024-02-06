@@ -1,0 +1,11 @@
+
+public class Employees {
+    String name,state;
+    boolean married;
+
+    public Employees(String nm, String st, boolean mrd) {
+        this.name = nm;
+        this.state = st;
+        this.married = mrd;
+    }
+}

@@ -1,0 +1,55 @@
+import java.util.ArrayList;
+import java.util.*;
+import java.util.stream.Collectors.*;
+import java.util.stream.*;
+
+
+public class GroupPartitioningDemo {
+    public static void main(String[] args) {
+        ArrayList<Employees> al = new ArrayList<Employees>();
+        Employees e1 = new Employees("Aman","Delhi",false);
+        al.add(e1);
+        Employees e2 = new Employees("Dheeraj","punjab",true);
+        al.add(e2);
+
+        Employees e3 = new Employees("Rajeev","West Bengal",false);
+        al.add(e3);
+
+        Employees e4 = new Employees("Deepti","Delhi",true);
+        al.add(e4);
+
+        Employees e5 = new Employees("Sandeep","UP",false);
+        al.add(e5);
+
+        Employees e6 = new Employees("Shruti","punjab",true);
+        al.add(e6);
+
+        // find the employee state wise
+        Map<String,List<Employees>> mp = al.stream().collect(Collectors.groupingBy(e->e.state));
+        Set<String> keys = mp.keySet();
+        for (String k:keys){
+            List<Employees> l = mp.get(k);
+            System.out.println("\nEmployees from" + k);
+            for(Employees e:l){
+                System.out.println(e.name + "\t" +e.state);
+            }
+        }
+        //Use partioting based on marital status
+        Map<Boolean,List<Employees>> mp1 = al.stream().collect(Collectors.partitioningBy(e->e.married));
+        Set<Boolean> ks = mp1.keySet();
+        for(Boolean k: ks){
+            if(k){
+                System.out.println("\n\nMarried Employee are\n");
+            }else {
+                System.out.println("\n\nUnmarried Employees are\n");
+            }
+            List<Employees> l = mp1.get(k);
+            for(Employees e:l){
+                System.out.println(e.name + "\t" +e.state);
+            }
+        }
+
+
+    }
+
+}
